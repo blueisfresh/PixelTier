@@ -1,0 +1,38 @@
+{
+  "materials": {
+    "Glas": {
+      "tileSizes": [10, 20, 30],
+      "colorPalette": [
+        "#FF5733",
+        "#33FF57",
+        "#3357FF",
+        "#FFFF33",
+        "#FF33FF",
+        "#33FFFF"
+      ]
+    },
+    "Keramik": {
+      "tileSizes": [15, 25, 35],
+      "colorPalette": [
+        "#FF4500",
+        "#32CD32",
+        "#1E90FF",
+        "#FFD700",
+        "#FF1493",
+        "#00CED1"
+      ]
+    },
+    "Marmor": {
+      "tileSizes": [20, 40, 60],
+      "colorPalette": [
+        "#D3D3D3",
+        "#A9A9A9",
+        "#808080",
+        "#696969",
+        "#778899",
+        "#2F4F4F"
+      ]
+    }
+  },
+  "gaps": [1, 2, 3, 4, 5]
+}

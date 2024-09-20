@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PixelTiler</title>
+  </head>
+  <body>
+    <h1>PixelTiler: Erstelle dein eigenes Mosaik</h1>
+
+    <!-- Bild-Upload Section -->
+    <h2>Bild-Upload</h2>
+    <label for="imageUpload">Bild hochladen</label>
+    <input
+      type="file"
+      id="imageUpload"
+      name="imageUpload"
+      accept="image/jpeg, image/png, image/webp"
+    />
+    <button>Bild hochladen</button>
+
+    <!-- Mosaik-Konfiguration Section -->
+    <h2>Mosaik-Konfiguration</h2>
+
+    <!-- Mosaikgröße -->
+    <h3>Mosaikgröße</h3>
+    <label for="width">Breite (mm)</label>
+    <input
+      type="text"
+      id="width"
+      name="width"
+      placeholder="Breite im Format xxx,xx"
+    />
+    <label for="height">Höhe (mm)</label>
+    <input
+      type="text"
+      id="height"
+      name="height"
+      placeholder="Höhe im Format xxx,xx"
+    />
+    <button>Größe übernehmen</button>
+
+    <!-- Materialauswahl -->
+    <h3>Materialauswahl</h3>
+    <label for="material">Material auswählen</label>
+    <select id="material" name="material">
+      <option value="glas">Glas</option>
+      <option value="keramik">Keramik</option>
+      <option value="marmor">Marmor</option>
+    </select>
+    <button>Material auswählen</button>
+
+    <!-- Abstand zwischen den Steinen -->
+    <h3>Abstand zwischen den Steinen</h3>
+    <label for="gap">Abstand (mm)</label>
+    <select id="gap" name="gap">
+      <option value="1">1 mm</option>
+      <option value="2">2 mm</option>
+      <option value="3">3 mm</option>
+      <option value="4">4 mm</option>
+      <option value="5">5 mm</option>
+    </select>
+    <button>Abstand übernehmen</button>
+
+    <!-- Steingröße -->
+    <h3>Steingröße</h3>
+    <label for="tileSize">Steingröße auswählen</label>
+    <select id="tileSize" name="tileSize">
+      <option value="10x10">10 x 10 mm</option>
+      <option value="20x20">20 x 20 mm</option>
+      <option value="30x30">30 x 30 mm</option>
+    </select>
+    <button>Steingröße auswählen</button>
+
+    <!-- Mosaik-Vorschau Section -->
+    <h2>Mosaik-Vorschau</h2>
+    <button>Mosaik generieren</button>
+    <button>Mosaik anpassen</button>
+    <div id="mosaicPreview">
+      <!-- Vorschau wird hier angezeigt -->
+    </div>
+
+    <!-- Farbpaletten-Auswahl Section -->
+    <h2>Farbpaletten-Auswahl</h2>
+    <label for="colorPalette">Farben auswählen</label><br />
+    <input type="checkbox" id="color1" name="color1" value="#FF5733" checked />
+    #FF5733<br />
+    <input type="checkbox" id="color2" name="color2" value="#33FF57" checked />
+    #33FF57<br />
+    <input type="checkbox" id="color3" name="color3" value="#3357FF" checked />
+    #3357FF<br />
+    <input type="checkbox" id="color4" name="color4" value="#FFFF33" checked />
+    #FFFF33<br />
+    <button>Farbpalette übernehmen</button>
+
+    <!-- Plan-Generierung Section -->
+    <h2>Plan-Generierung und Download</h2>
+    <button>Plan herunterladen</button>
+  </body>
+</html>
