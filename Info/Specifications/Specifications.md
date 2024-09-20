@@ -8,6 +8,7 @@
 - Umwandlung der Bilder in individuell angepasste Mosaikbilder.
 - Herunterladen vom "Plan".
 
+
 ## 2. Funktionalitäten und Benutzeranforderungen
 **Hauptfunktionen**:
 - Upload von Bildern jeder Größe durch den Benutzer.
