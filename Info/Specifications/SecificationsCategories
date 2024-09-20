@@ -1,0 +1,42 @@
+
+### Inhaltsverzeichnis für das Pflichtenheft:
+
+1. **Projektübersicht**
+   - Was ist der Zweck des Projekts?
+   - Was sind die Hauptziele?
+
+2. **Funktionalitäten und Benutzeranforderungen**
+   - Welche Hauptfunktionen muss die Website bieten?
+   - Welche Benutzerinteraktionen sind erforderlich?
+
+3. **Nicht-funktionale Anforderungen**
+   - Welche Performance-Anforderungen gibt es (z.B. Ladezeiten, Verarbeitungsgeschwindigkeit)?
+   - Gibt es Sicherheitsanforderungen?
+
+4. **Technische Spezifikationen**
+   - Welche Technologien und Frameworks werden eingesetzt?
+   - Welche externen Bibliotheken oder Dienste werden verwendet?
+
+5. **Benutzeroberfläche und Design**
+   - Wie soll die Benutzeroberfläche gestaltet sein?
+   - Gibt es spezifische Anforderungen an das Design oder die Benutzerfreundlichkeit?
+
+6. **Datenmodell und Datenmanagement**
+   - Wie ist das Datenmodell strukturiert?
+   - Wie werden Daten gehandhabt und gespeichert?
+
+7. **Testvorgaben**
+   - Welche Arten von Tests werden durchgeführt (Unit Tests, Integrationstests, Systemtests)?
+   - Wer ist verantwortlich für die Tests?
+
+8. **Abnahmekriterien**
+   - Unter welchen Bedingungen wird das Projekt als erfolgreich angesehen?
+   - Wer ist für die Abnahme verantwortlich?
+
+9. **Projektplan und Meilensteine**
+   - Was ist der Zeitplan für das Projekt?
+   - Welche wichtigen Meilensteine müssen erreicht werden?
+
+10. **Risiken und Management**
+    - Welche potenziellen Risiken gibt es?
+    - Wie werden diese Risiken gemanagt?
