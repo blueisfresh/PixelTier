@@ -1,0 +1,14 @@
+/* Styling for the section container */
+.section {
+  text-align: center;
+    background-color: #e2e8f0;  /* Light background for the container */
+    border-radius: 35px;        /* Rounded corners */
+    padding: 20px;              /* Padding inside the container */
+    margin: 20px 0;             /* Space between the containers */
+  }
+.bordering{
+  margin: 50px;
+}
+body{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
