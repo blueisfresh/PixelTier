@@ -6,6 +6,9 @@ let mosaicConfig = {
   tileSize: 0,
 };
 
+// mosaic Plan
+let mosaicPlan = [];
+
 // Uploaded Picture Variables
 let imgFile = undefined;
 const uploadedFileForm = document.getElementById("imageUpload");
@@ -28,15 +31,14 @@ uploadedFileForm.addEventListener("change", function (evt) {
   console.log("File selected", imgFile);
 
   if (imgFile) {
-    displayImage(imgFile); // Display the image if a file is selected
+    displayImage(imgFile); 
   } else {
-    clearImage(); // Clear the image if no file is selected
+    clearImage(); 
   }
 });
 
 // Event-Listener für den Bestätigungsbutton
 btnConfirmSelection.addEventListener("click", function () {
-  // Alle Werte aus den Eingabefeldern in Object
   mosaicConfig.width = inputWidth.value;
   mosaicConfig.height = inputHeight.value;
   mosaicConfig.material = selectMaterial.value;
@@ -51,7 +53,7 @@ function displayImage(file) {
   const reader = new FileReader();
 
   reader.onload = function (event) {
-    clearImage(); // Clear any previously displayed image
+    clearImage(); 
 
     const imgElement = document.createElement("img");
     imgElement.src = event.target.result; // Set the loaded image as the source
@@ -64,28 +66,47 @@ function displayImage(file) {
 }
 
 function clearImage() {
-  imgPreviewContainer.innerHTML = ""; // Clears the mosaicPreview div
+  imgPreviewContainer.innerHTML = ""; 
 }
 
 
 // Calculating the mosaik 
 
 function getColorPalette(material) {
+  // Check if the JSON data is loaded
+  if (!jsonData || !jsonData.materials) {
+    console.error('JSON data is not loaded or materials key is missing.');
+    return [];
+  }
 
-  // Retrieve the color paletter for the selected method from the loaded JSON data
+  // Retrieve the material data from the JSON
+  const materialData = jsonData.materials[material];
+  
+  // Check if the material exists in the JSON and has a color palette
+  if (materialData && materialData.colorPalette) {
+    return materialData.colorPalette;
+  } else {
+    console.error(`Color palette not found for the selected material: ${material}`);
+    return [];
+  }
 }
 
-function calculateTiles() {
+function calculateTiles(mosaicWidth, mosaicHeight, tileSize, gapSize) {
 
-  // Calculate the number of tiles horizontally and vertically based on the mosaic dimensions and tile size
+  const numTilesWidth = Math.floor(mosaicWidth / (tileSize + gapSize));
+  const numTilesHeight = Math.floor(mosaicHeight / (tileSize + gapSize));
 
-  // The results from this function (number of tiles in both directions) are used in generateMosaicPlan() to correctly generate the mosaic grid.
+  return {
+    numTilesWidth,
+    numTilesHeight
+  };
 }
 
 function generateMosaicPlan(palette) {
   // Generate the 2D mosaic plan using the color palette and tile configuration.
 
   // This function calculates the number of tiles (from calculateTiles()) that fit within the mosaic dimensions.
+  
   // It loops through each tile position, retrieves the average color from the corresponding area in the uploaded image, 
   // It finds the closest matching color from the provided color palette (from getColorPalette()).
   
