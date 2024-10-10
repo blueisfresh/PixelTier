@@ -17,7 +17,10 @@
       name="imageUpload"
       accept="image/jpeg, image/png, image/webp"
     />
-    <button>Bild hochladen</button>
+    
+    <div id="mosaicPreview">
+      <!-- Image will be displayed here -->
+    </div>
 
     <!-- Mosaik-Konfiguration Section -->
     <h2>Mosaik-Konfiguration</h2>
@@ -38,7 +41,6 @@
       name="height"
       placeholder="Höhe im Format xxx,xx"
     />
-    <button>Größe übernehmen</button>
 
     <!-- Materialauswahl -->
     <h3>Materialauswahl</h3>
@@ -48,7 +50,6 @@
       <option value="keramik">Keramik</option>
       <option value="marmor">Marmor</option>
     </select>
-    <button>Material auswählen</button>
 
     <!-- Abstand zwischen den Steinen -->
     <h3>Abstand zwischen den Steinen</h3>
@@ -60,7 +61,6 @@
       <option value="4">4 mm</option>
       <option value="5">5 mm</option>
     </select>
-    <button>Abstand übernehmen</button>
 
     <!-- Steingröße -->
     <h3>Steingröße</h3>
@@ -70,7 +70,9 @@
       <option value="20x20">20 x 20 mm</option>
       <option value="30x30">30 x 30 mm</option>
     </select>
-    <button>Steingröße auswählen</button>
+
+    <!-- Neuer Bestätigungsbutton für alle Konfigurationen -->
+    <button id="confirmConfigBtn">Alle Konfigurationen bestätigen</button>
 
     <!-- Mosaik-Vorschau Section -->
     <h2>Mosaik-Vorschau</h2>
@@ -96,5 +98,7 @@
     <!-- Plan-Generierung Section -->
     <h2>Plan-Generierung und Download</h2>
     <button>Plan herunterladen</button>
+
+    <script src="../js/main.js"></script>
   </body>
 </html>
