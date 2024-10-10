@@ -66,3 +66,36 @@ function displayImage(file) {
 function clearImage() {
   imgPreviewContainer.innerHTML = ""; // Clears the mosaicPreview div
 }
+
+
+// Calculating the mosaik 
+
+function getColorPalette(material) {
+
+  // Retrieve the color paletter for the selected method from the loaded JSON data
+}
+
+function calculateTiles() {
+
+  // Calculate the number of tiles horizontally and vertically based on the mosaic dimensions and tile size
+
+  // The results from this function (number of tiles in both directions) are used in generateMosaicPlan() to correctly generate the mosaic grid.
+}
+
+function generateMosaicPlan(palette) {
+  // Generate the 2D mosaic plan using the color palette and tile configuration.
+
+  // This function calculates the number of tiles (from calculateTiles()) that fit within the mosaic dimensions.
+  // It loops through each tile position, retrieves the average color from the corresponding area in the uploaded image, 
+  // It finds the closest matching color from the provided color palette (from getColorPalette()).
+  
+  // For each tile, the closest color is assigned to the mosaic grid. 
+  // The generated mosaic plan is a 2D array that contains the colors assigned to each tile, which will be passed to the renderMosaic() function to draw the mosaic on the canvas.
+}
+
+function renderMosaic(mosaicPlan) {
+  // Display the mosaic on an HTML <canvas> element.
+
+  // This function takes the output of generateMosaicPlan() and draws the final mosaic on the screen.
+}
+
