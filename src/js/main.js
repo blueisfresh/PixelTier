@@ -66,7 +66,7 @@ var TILE_WIDTH = 20;
 var TILE_HEIGHT = 20;
 
 document.getElementById("imageUpload").onchange = function () {
-  var reader = new FileReader();
+  var reader = new FileReader();  
   reader.onload = function (e) {
     var imageElement = document.getElementById("image");
     imageElement.onload = function () {
