@@ -8,9 +8,134 @@ let mosaicConfig = {
 
 // mosaic Plan
 let mosaicPlan = [];
+
 // global variables for the canvas and its context
 let canvas;
 let ctx;
+
+// JSON File
+const jsonData = {
+  materials: {
+    glas: {
+      tileSizes: [10, 20, 30],
+      colorPalette: [
+        "#FF5733",
+        "#33FF57",
+        "#3357FF",
+        "#FFFF33",
+        "#FF33FF",
+        "#33FFFF",
+        "#C70039",
+        "#900C3F",
+        "#581845",
+        "#FFC300",
+        "#DAF7A6",
+        "#FF5733",
+        "#1F618D",
+        "#1ABC9C",
+        "#F39C12",
+        "#D35400",
+        "#8E44AD",
+        "#2ECC71",
+        "#E74C3C",
+        "#9B59B6",
+        "#2980B9",
+        "#27AE60",
+        "#16A085",
+        "#2C3E50",
+        "#34495E",
+        "#ECF0F1",
+        "#E67E22",
+        "#7D3C98",
+        "#8E44AD",
+        "#5DADE2",
+        "#48C9B0",
+        "#C0392B",
+        "#A569BD",
+        "#5499C7",
+        "#1F618D",
+        "#7FB3D5",
+        "#85929E",
+        "#F7DC6F",
+        "#E74C3C",
+        "#1ABC9C",
+        "#58D68D",
+        "#5DADE2",
+        "#F39C12",
+        "#D5D8DC",
+        "#F8C471",
+        "#CD6155",
+        "#7B7D7D",
+        "#5F6A6A",
+      ],
+    },
+    Keramik: {
+      tileSizes: [15, 25, 35],
+      colorPalette: [
+        "#FF4500",
+        "#32CD32",
+        "#1E90FF",
+        "#FFD700",
+        "#FF1493",
+        "#00CED1",
+        "#FA8072",
+        "#7CFC00",
+        "#FF69B4",
+        "#BA55D3",
+        "#9370DB",
+        "#3CB371",
+        "#20B2AA",
+        "#778899",
+        "#B0C4DE",
+        "#00FF00",
+        "#4682B4",
+        "#4169E1",
+        "#6A5ACD",
+        "#483D8B",
+        "#BDB76B",
+        "#2E8B57",
+        "#8FBC8F",
+        "#DA70D6",
+        "#7FFFD4",
+        "#00FA9A",
+        "#FFDAB9",
+        "#B22222",
+        "#BC8F8F",
+        "#8B4513",
+        "#A52A2A",
+        "#A0522D",
+        "#8A2BE2",
+        "#FF6347",
+        "#EE82EE",
+        "#D2691E",
+        "#8B0000",
+        "#006400",
+        "#4682B4",
+        "#8A2BE2",
+      ],
+    },
+    Marmor: {
+      tileSizes: [20, 40, 60],
+      colorPalette: [
+        "#D3D3D3",
+        "#A9A9A9",
+        "#808080",
+        "#696969",
+        "#778899",
+        "#2F4F4F",
+        "#C0C0C0",
+        "#DCDCDC",
+        "#BEBEBE",
+        "#A0A0A0",
+        "#8B8B8B",
+        "#4F4F4F",
+        "#7B7B7B",
+        "#525252",
+      ],
+    },
+  },
+  gaps: [1, 2, 3, 4, 5],
+};
 
 // Uploaded Picture Variables
 let imgFile = undefined;
@@ -109,8 +234,9 @@ function clearImage() {
 function getColorPalette(material) {
   // Check if the JSON data is loaded
   if (!jsonData || !jsonData.materials) {
-    console.error("JSON data is not loaded or materials key is missing.");
-    return [];
+    throw new Error(
+      "JSON data is not loaded or the 'materials' key is missing."
+    );
   }
 
   // Retrieve the material data from the JSON
@@ -142,7 +268,7 @@ function generateMosaicPlan(ctx, width, height) {
     width,
     height,
     mosaicConfig.tileSize,
-    mosaicConfig.gapSize
+    mosaicConfig.gap
   );
 
   mosaicPlan = []; // Reset the mosaic plan array for new generation
@@ -152,17 +278,19 @@ function generateMosaicPlan(ctx, width, height) {
     let row = []; // Create a new array for each row
 
     for (let x = 0; x < numTilesWidth; x++) {
-      // Retrieve the average hex color from the corresponding area in the uploaded image
+      // Calculate the average hex color for the current tile area
       const avgColor = getAverageColorFromImage(
         ctx,
-        x,
-        y,
-        mosaicConfig.tileSize,
-        mosaicConfig.gapSize
+        x * (mosaicConfig.tileSize + mosaicConfig.gap),
+        y * (mosaicConfig.tileSize + mosaicConfig.gap),
+        mosaicConfig.tileSize
       );
 
-      // Push the hex color value to the current row
-      row.push(avgColor);
+      // Find the closest hex code from the selected material's color palette
+      const closestColor = getClosestColor(avgColor, mosaicConfig.material);
+
+      // Push the closest hex color value to the current row
+      row.push(closestColor);
     }
 
     // After the row is filled with colors for the current y-level, push it to the mosaic plan
@@ -173,16 +301,56 @@ function generateMosaicPlan(ctx, width, height) {
   return mosaicPlan; // The 2D array of average colors for each tile
 }
 
+// Finds the closest matching color in the palette based on the average color of the tile.
+function getClosestColor(avgColor, material) {
+  const colorPalette = getColorPalette(material);
+  let closestColor = colorPalette[0];
+  let smallestDistance = Infinity; // Start with an infinitely large distance
+
+  const avgRGB = hexToRgb(avgColor); // Convert the average color (hex) to RGB for comparison
+
+  // Iterate through each color in the palette to find the closest match
+  colorPalette.forEach((paletteColor) => {
+    const paletteRGB = hexToRgb(paletteColor);
+    const distance = colorDistance(avgRGB, paletteRGB);
+
+    // Update the closest color if a smaller distance is found
+    if (distance < smallestDistance) {
+      smallestDistance = distance;
+      closestColor = paletteColor;
+    }
+  });
+
+  console.log(`Closest color to ${avgColor} is ${closestColor}`);
+  return closestColor;
+}
+
+// Calculates the Euclidean distance between two RGB colors.
+function colorDistance(rgb1, rgb2) {
+  return Math.sqrt(
+    Math.pow(rgb1.r - rgb2.r, 2) +
+      Math.pow(rgb1.g - rgb2.g, 2) +
+      Math.pow(rgb1.b - rgb2.b, 2)
+  );
+}
+
+// Converts a hex color code to an RGB object.
+function hexToRgb(hex) {
+  const bigint = parseInt(hex.slice(1), 16);
+
+  return {
+    r: (bigint >> 16) & 255, // Extract the red value
+    g: (bigint >> 8) & 255, // Extract the green value
+    b: bigint & 255, // Extract the blue value
+  };
+}
+
 function renderMosaic(mosaicPlan) {
   // Display the mosaic on an HTML <canvas> element.
   // This function takes the output of generateMosaicPlan() and draws the final mosaic on the screen.
 }
 
-function getAverageColorFromImage(ctx, tileX, tileY, tileSize, gapSize) {
-  // Calculate the starting position of the tile (accounting for gaps)
-  const startX = tileX * (tileSize + gapSize);
-  const startY = tileY * (tileSize + gapSize);
-
+function getAverageColorFromImage(ctx, startX, startY, tileSize) {
   // Extract the pixel data for the area that corresponds to this tile
   const imageData = ctx.getImageData(startX, startY, tileSize, tileSize);
   const pixels = imageData.data; // This is an array containing RGBA values of each pixel
