@@ -31,8 +31,6 @@ function populateMaterialDropdown() {
     return;
   }
 
-  console.log("Populating material dropdown...");
-
   const materials = new Set();
   jsonData.stones.forEach((stone) => {
     materials.add(stone.material);
@@ -59,6 +57,8 @@ function handleMaterialChange() {
 }
 
 function populateSizeDropdown(selectedMaterial) {
+  console.log("Populating Size dropdown...");
+
   selectTileSize.innerHTML = "";
 
   // Filter stones by the selected material and add unique sizes to the dropdown
