@@ -48,30 +48,18 @@
     <h3>Materialauswahl</h3>
     <label for="material">Material auswählen</label>
     <select id="material" name="material">
-      <option value="glas">Glas</option>
-      <option value="keramik">Keramik</option>
-      <option value="marmor">Marmor</option>
+      <!--Filled with the materials.js-->
     </select>
 
     <!-- Abstand zwischen den Steinen -->
     <h3>Abstand zwischen den Steinen</h3>
     <label for="gap">Abstand (mm)</label>
-    <select id="gap" name="gap">
-      <option value="1">1 mm</option>
-      <option value="2">2 mm</option>
-      <option value="3">3 mm</option>
-      <option value="4">4 mm</option>
-      <option value="5">5 mm</option>
-    </select>
+    <select id="gap" name="gap"></select>
 
     <!-- Steingröße -->
     <h3>Steingröße</h3>
     <label for="tileSize">Steingröße auswählen</label>
-    <select id="tileSize" name="tileSize">
-      <option value="10x10">10 x 10 mm</option>
-      <option value="20x20">20 x 20 mm</option>
-      <option value="30x30">30 x 30 mm</option>
-    </select>
+    <select id="tileSize" name="tileSize"></select>
 
     <!-- Neuer Bestätigungsbutton für alle Konfigurationen -->
     <button id="confirmConfigBtn">Alle Konfigurationen bestätigen</button>
@@ -102,5 +90,6 @@
 
     <script src="../js/materials.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/dropdown.js"></script>
   </body>
 </html>

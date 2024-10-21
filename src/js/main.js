@@ -21,18 +21,13 @@ const imgPreviewContainer = document.getElementById("mosaicPreview");
 // Configuation Variables
 const inputWidth = document.getElementById("width");
 const inputHeight = document.getElementById("height");
-const selectMaterial = document.getElementById("material");
+const materialDropdown = document.getElementById("material");
 const selectGap = document.getElementById("gap");
 const selectTileSize = document.getElementById("tileSize");
 
 const btnImgUpload = document.getElementById("imageUploadBtn");
 const btnConfirmSelection = document.getElementById("confirmConfigBtn");
 const btnGenerateMosaic = document.getElementById("mosaicGenerateBtn");
-
-// Initialisation
-document.addEventListener("DOMContentLoaded", function () {
-  console.log(jsonData); // This should print the jsonData object from materialData.js
-});
 
 // Handle file selection
 uploadedFileForm.addEventListener("change", function (evt) {
@@ -52,8 +47,9 @@ uploadedFileForm.addEventListener("change", function (evt) {
 btnConfirmSelection.addEventListener("click", function () {
   mosaicConfig.width = parseFloat(inputWidth.value);
   mosaicConfig.height = parseFloat(inputHeight.value);
-  mosaicConfig.material = selectMaterial.value;
-  mosaicConfig.gap = parseFloat(selectGap.value);
+  mosaicConfig.material = material.value;
+  mosaicConfig.gap = parseInt(selectGap.value);
+  console.log(selectGap.value);
 
   // Extract only the number part from '10x10'
   mosaicConfig.tileSize = parseFloat(selectTileSize.value.split("x")[0]);
