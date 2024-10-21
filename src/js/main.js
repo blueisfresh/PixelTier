@@ -1,3 +1,13 @@
+const MM_TO_PX = 3.78; // This conversion factor assumes 1 mm is approximately 3.78 pixels.
+
+let mosaicConfig = {
+  width: 0,
+  height: 0,
+  material: "",
+  gapSize: 0,
+  tileSize: 0,
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   populateMaterials();
 
@@ -62,11 +72,22 @@ function populateColorPalette(material) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-var TILE_WIDTH = 20;
-var TILE_HEIGHT = 20;
+// Values applied in Mosaic Config
+document
+  .getElementById("confirmConfigBtn")
+  .addEventListener("click", function () {
+    mosaicConfig.width = parseFloat(width.value);
+    mosaicConfig.height = parseFloat(height.value);
+    mosaicConfig.material = material.value;
+    mosaicConfig.gap = parseFloat(gap.value);
+
+    console.log("configuration applied: ", mosaicConfig);
+  });
+
+document.getElementById("mosaicGenerateBtn").addEventListener("click", create);
 
 document.getElementById("imageUpload").onchange = function () {
-  var reader = new FileReader();  
+  var reader = new FileReader();
   reader.onload = function (e) {
     var imageElement = document.getElementById("image");
     imageElement.onload = function () {
@@ -143,8 +164,8 @@ function photomosaic(image) {
   var pixels = imageData.data;
 
   // Number of mosaic tiles
-  var numTileRows = Math.floor(canvasHeight / TILE_HEIGHT);
-  var numTileCols = Math.floor(canvasWidth / TILE_WIDTH);
+  var numTileRows = Math.floor(canvasHeight / mosaicConfig.height);
+  var numTileCols = Math.floor(canvasWidth / mosaicConfig.width);
 
   // Canvas copy of image
   var imageCanvas = document.createElement("canvas");
@@ -170,13 +191,14 @@ function photomosaic(image) {
 
     try {
       data = imageCanvasContext.getImageData(
-        column * TILE_WIDTH,
-        row * TILE_HEIGHT,
-        TILE_WIDTH,
-        TILE_HEIGHT
+        column * mosaicConfig.width,
+        row * mosaicConfig.height,
+        mosaicConfig.width,
+        mosaicConfig.height
       );
     } catch (e) {
-      alert("Not happening this time!");
+      console.log("Error: Something went wrong. Here are the details...");
+
       return rgb;
     }
 
@@ -207,11 +229,11 @@ function photomosaic(image) {
       var blue = rgb.b;
 
       // Loop through each tile pixel
-      for (var tr = 0; tr < TILE_HEIGHT; tr++) {
-        for (var tc = 0; tc < TILE_WIDTH; tc++) {
+      for (var tr = 0; tr < mosaicConfig.height; tr++) {
+        for (var tc = 0; tc < mosaicConfig.width; tc++) {
           // Calculate the true position of the tile pixel
-          var trueRow = r * TILE_HEIGHT + tr;
-          var trueCol = c * TILE_WIDTH + tc;
+          var trueRow = r * mosaicConfig.height + tr;
+          var trueCol = c * mosaicConfig.width + tc;
 
           // Calculate the position of the current pixel in the array
           var pos = trueRow * (imageData.width * 4) + trueCol * 4;

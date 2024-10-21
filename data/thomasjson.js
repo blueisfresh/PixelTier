@@ -1,0 +1,17 @@
+const stones = [
+  { id: 1, size: 10, material: "marble", color: "#5C392E" },
+  { id: 2, size: 10, material: "marble", color: "#D0B297" },
+  { id: 3, size: 10, material: "marble", color: "#F3E6D6" },
+  { id: 4, size: 10, material: "marble", color: "#E9C895" },
+  { id: 5, size: 10, material: "marble", color: "#EDAE2D" },
+  { id: 6, size: 10, material: "marble", color: "#4D423E" },
+  { id: 7, size: 10, material: "marble", color: "#ECC698" },
+  { id: 8, size: 10, material: "marble", color: "#E19F58" },
+  { id: 9, size: 10, material: "marble", color: "#DF8E4B" },
+  { id: 10, size: 10, material: "marble", color: "#C3B065" },
+  { id: 11, size: 10, material: "marble", color: "#EEC688" },
+  { id: 12, size: 10, material: "marble", color: "#7F8369" },
+  { id: 13, size: 10, material: "marble", color: "#E6D9BD" },
+  { id: 14, size: 8, material: "glas", color: "#DAB479" },
+  { id: 15, size: 8, material: "glas", color: "#91DAF0" },
+];
